@@ -23,11 +23,13 @@ const getExerciseById = asyncHandler(async(req,res) => {
 // @route GET /api/exercise/bodyPartList
 // @access PRIVATE
 const getBodyPartList = asyncHandler(async(req,res) => {
-    const bodyParts = await Exercise.findAll({
-        attributes: [[sequelize.fn('DISTINCT', sequelize.col('bodyPart')), 'bodyPart']]
-    })
+    const bodyParts = await Exercise.aggregate('bodyPart', 'DISTINCT', { plain: false })
 
-    bodyPartsArr = bodyParts.map((item) => item.bodyPart)
+    // const bodyParts = await Exercise.findAll({
+    //     attributes: [[sequelize.fn('DISTINCT', sequelize.col('bodyPart')), 'bodyPart']]
+    // })
+
+    const bodyPartsArr = bodyParts.map((item) => item.DISTINCT)
 
     res.json(bodyPartsArr)
 })
@@ -69,7 +71,7 @@ const getSearchResult = asyncHandler(async(req,res) => {
         limit: 10
     })
 
-    res.json(search)
+    res.json({data: search})
 })
 
 

@@ -20,7 +20,7 @@ const registerToken = (id,email) => {
     const url = `http://localhost:5000/api/users/confirmation/${emailToken}`
 
     transporter.sendMail({
-      from: '"Narottam Sahu" <webdripdev@gmail.com>',
+      from: '"GymBro" <webdripdev@gmail.com>',
       to: email,
       subject: 'Confirm email',
       html: `Please click on this url to confirm your email: <a href="${url}">${url}</a>`

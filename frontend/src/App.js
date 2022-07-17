@@ -1,57 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState } from 'react';
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/scrollToTop';
+import SidebarLayout from './components/Sidebar/Sidebar';
+import CheckEmail from './pages/CheckEmail';
+import ConfirmEmail from './pages/ConfirmEmail';
+
+// routes
+import Dashboard from './pages/Dashboard';
+import Exercises from './pages/Exercises';
+import ForgotPassword from './pages/ForgotPassword';
+import Login from './pages/Login';
+import { NothingFoundBackground } from './pages/NotFound404';
+import Register from './pages/Register';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>  
+      <BrowserRouter>
+        <ScrollToTop/>
+        <Routes >
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route path="/register/confirmEmail" element={<ConfirmEmail />} />
+          <Route path="/forgotPassword/checkEmail" element={<CheckEmail />} />
+          <Route  element={<SidebarLayout />} >
+            <Route 
+              path="/app" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard/>
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/app/exercise" 
+              element={
+                <ProtectedRoute>
+                  <Exercises/>
+                </ProtectedRoute>
+              } 
+            />
+          </Route>
+          <Route path = "*" element={<NothingFoundBackground/>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -64,8 +64,7 @@ const confirmUserToken = asyncHandler(async(req,res) => {
             await User.update({confirmed: true}, {where:{
                 id: verify.id
             }})
-            res.status(200).json({message: "User confirmed successfully."})
-
+            res.render('register-user-success')
         } catch (error) {
             res.status(400)
             throw new Error('Could not verify user, Please try again! ')
@@ -149,6 +148,8 @@ const forgotPassword = asyncHandler(async (req,res) => {
 
     const url = `http://localhost:5000/api/users/passwordReset/${user.id}/${token}`
 
+
+    // sending email to user
     const mail = await transporter.sendMail({
         from: '"Narottam Sahu" <webdripdev@gmail.com>',
         to: email,
@@ -156,7 +157,7 @@ const forgotPassword = asyncHandler(async (req,res) => {
         html: `Please click on this url and fill the necessary details to change your password: <a href="${url}">${url}</a>`
     })
 
-    res.status(200).json({status: "Success", messageId: mail.messageId })
+    res.status(200).json({status: "Success", messageId: mail.messageId, email })
 })
 
 // @desc    Reset User password

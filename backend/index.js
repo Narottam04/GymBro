@@ -13,7 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
 // Create User
 app.use('/api/users',require('./routes/userRoute'))
@@ -21,7 +21,7 @@ app.use('/api/users',require('./routes/userRoute'))
 app.use('/api/exercise',require('./routes/exerciseRoute'))
 
 app.get('/', (req,res) => {
-  res.send(`server is running :)`)
+  res.send('server and database is running.')
 })
 
 
