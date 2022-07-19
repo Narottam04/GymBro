@@ -19,6 +19,8 @@ app.set('view engine', 'ejs');
 app.use('/api/users',require('./routes/userRoute'))
 // Exercise api
 app.use('/api/exercise',require('./routes/exerciseRoute'))
+// yt recommend video api
+app.use('/api/ytvideo/',require('./routes/ytVideoRoute'))
 
 app.get('/', (req,res) => {
   res.send('server and database is running.')

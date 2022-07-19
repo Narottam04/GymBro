@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 import { showNotification } from '@mantine/notifications';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion} from "framer-motion"
 
 const useStyles = createStyles(() => ({
   page: {
@@ -111,7 +112,7 @@ const Login = () => {
   }
 
   return (
-    <section className={classes.page}>
+    <motion.section className={classes.page}>
       <div className={classes.formLayout}>
         <div className={classes.form} >
           <h1 className={classes.heading}>Log in</h1>
@@ -153,7 +154,7 @@ const Login = () => {
       </div>
 
       <div className={classes.promo}></div>
-    </section>
+    </motion.section>
   )
 }
 

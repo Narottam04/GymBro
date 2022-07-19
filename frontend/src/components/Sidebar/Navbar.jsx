@@ -6,13 +6,14 @@ import {
 import { BiDumbbell } from "react-icons/bi";
 import { UserButton } from './UserButton';
 import { LinksGroup } from './NavbarLinksGroup';
+import { Link } from 'react-router-dom';
 
 const mockdata = [
-  { label: 'Dashboard', icon: Gauge },
-  { label: 'Exercises', icon: BiDumbbell },
-  { label: 'Dashboard', icon: Gauge },
-  { label: 'Dashboard', icon: Gauge },
-  { label: 'Dashboard', icon: Gauge },
+  { label: 'Dashboard', icon: Gauge,links: "/app" },
+  { label: 'Exercises', icon: BiDumbbell, links: "/app/exercise"},
+  { label: 'Dashboard', icon: Gauge,links: "/app" },
+  { label: 'Dashboard', icon: Gauge,links: "/app" },
+  { label: 'Dashboard', icon: Gauge ,links: "/app"},
 //   {
 //     label: 'Market news',
 //     icon: Notes,
@@ -65,7 +66,11 @@ const useStyles = createStyles((theme) => ({
 
 export function NavbarNested() {
   const { classes } = useStyles();
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const links = mockdata.map((item) => (
+    <Link to={item.links}>
+      <LinksGroup {...item} key={item.label} />
+    </Link>
+  ));
   const [opened, setOpened] = useState(false);
   return (
     <Navbar hiddenBreakpoint="md" hidden={!opened} height="100vh" width={{ sm: 250 }} p="md" className={classes.navbar} >

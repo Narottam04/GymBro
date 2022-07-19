@@ -11,11 +11,11 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
       <NotificationsProvider position="top-center" zIndex={2077}>
+    <Provider store={store}>
         <App />
-      </NotificationsProvider>
     </Provider>
+      </NotificationsProvider>
   </React.StrictMode>
 );
 

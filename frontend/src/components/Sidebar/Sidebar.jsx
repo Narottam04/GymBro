@@ -8,7 +8,8 @@ const SidebarLayout = () => (
         styles={{
           main: {
             background: "#FFFFFF",
-            
+            maxWidth: "100%",
+            overflowX: "hidden"
           }, 
         }}
         navbarOffsetBreakpoint="md"

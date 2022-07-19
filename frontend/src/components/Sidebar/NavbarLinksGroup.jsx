@@ -46,21 +46,22 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === 'ltr' ? ChevronRight : ChevronLeft;
-  const items = (hasLinks ? links : []).map((link) => (
-    <Text
-      component="a"
-      className={classes.link}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </Text>
-  ));
+
+  // const items = (hasLinks ? links : []).map((link) => (
+  //   <Link
+  //     component=''
+  //     className={classes.link}
+  //     to={link}
+  //     key={link.label}
+  //     onClick={(event) => event.preventDefault()}
+  //   >
+  //     {link.label}
+  //   </Link>
+  // ));
 
   return (
     <>
-      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
+      <UnstyledButton className={classes.control}>
         <Group position="apart" spacing={0}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ThemeIcon variant="light" color="orange"  size={30}>
@@ -79,7 +80,7 @@ export function LinksGroup({ icon: Icon, label, initiallyOpened, links }) {
           )}
         </Group>
       </UnstyledButton>
-      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
+      {/* {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null} */}
     </>
   );
 }

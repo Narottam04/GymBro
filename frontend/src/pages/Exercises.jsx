@@ -7,6 +7,8 @@ import Cards from "../components/Cards/Cards";
 import CardSkeleton from "../components/Cards/CardSkeleton";
 import { allExercise, reset, searchExercise } from "../features/exercise/exerciseSlice";
 import { useDebouncedValue } from '@mantine/hooks';
+import { motion} from "framer-motion"
+import { useGetExerciseQuery } from "../features/exercise/exerciseApi";
 
 const useStyles = createStyles(() => ({
   heading: {
@@ -39,31 +41,32 @@ const Exercises = () => {
   const [debouncedSearch] = useDebouncedValue(search, 500);
 
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
 
-  const {exercise,isLoading,isError,isSuccess,message} = useSelector((state) => state.exercise)
+  // const {exercise,isLoading,isError,isSuccess,message} = useSelector((state) => state.exercise)
+
+  const {data:exercise,isSuccess,error,isLoading,refetch} = useGetExerciseQuery({search:debouncedSearch,token:user.token,page:activePage,limit:12}) 
+  
 
   useEffect(() => {
-    if (isError) {
+    if (error) {
       showNotification({
         title: 'Error :(',
-        message: `${message}`,
+        message: `${error && error.message}`,
         color: 'red',
       })
     }
-    if(debouncedSearch){
-      dispatch(searchExercise(debouncedSearch))
-    }
-    else{
-      dispatch(allExercise({page:activePage,limit:12}))
-    }
+    // if(debouncedSearch){
+    //   refetch({search:debouncedSearch,token:user.token,page:activePage,limit:12})
+    // }
 
     return () => {
       dispatch(reset())
     }
-  }, [isError, message, dispatch,debouncedSearch,activePage])
+  }, [error, dispatch,debouncedSearch,activePage])
 
   return (
-    <section>
+    <motion.section exit={{opacity: 0}} initial={{opacity: 0}} animate={{opacity: 1}}  >
         <h1 className={classes.heading}>Exercises</h1>
         {/* search bar */}
         <div className={classes.searchBar}>
@@ -106,7 +109,7 @@ const Exercises = () => {
             <Pagination onChange={setActivePage} total={exercise.max.maxPages} siblings={3} initialPage={activePage} />
           }
         </div>
-    </section>
+    </motion.section>
   )
 }
 
