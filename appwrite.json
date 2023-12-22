@@ -1,0 +1,54 @@
+{
+    "projectId": "6473564a8a0084a09fee",
+    "projectName": "gymbro",
+    "functions": [
+        {
+            "$id": "647850ee5c478cbc305d",
+            "name": "yt-search",
+            "runtime": "node-16.0",
+            "path": "functions/yt-search",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "64848c75b1d41924b70e",
+            "name": "chatbot",
+            "runtime": "node-16.0",
+            "path": "functions/chatbot",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        },
+        {
+            "$id": "656c4152581470573158",
+            "name": "yt-search-2",
+            "runtime": "node-18.0",
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "path": "functions/yt-search-2"
+        }
+    ]
+}
